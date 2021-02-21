@@ -63,7 +63,7 @@ def eval(net: Net, batch_size: int, mnist_eval):
 			_, predicted = torch.max(outputs.data, 1)
 			total += target.size(0)
 			correct += (predicted == target).sum().item()
-	print('Evaluation Accuracy: {:.2f}, Batch size: {:d}'.format(correct / total * 100, batch_size))
+	print('Evaluation Accuracy: {:.2f} %, Batch size: {:d}'.format(correct / total * 100, batch_size))
 	return correct / total * 100
 
 def main():
@@ -74,13 +74,12 @@ def main():
 
 	net = Net()
 	epoch = random.randint(1, 5)
-	batch_size = random.randint(10, 500)
+	batch_size = random.randint(10, 1000)
 	accuracy = 0
 	while (accuracy < 90):
 		train(net, epoch, batch_size, mnist_train)
 		accuracy = eval(net, batch_size, mnist_eval)
 		epoch = epoch + 1
-	train(net, epoch)
 	test(net, batch_size, mnist_test)
 
 
